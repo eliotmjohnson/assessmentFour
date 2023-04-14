@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    max-height: 12rem;
+    max-width: 15rem;
+}
+
+#sec1 {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    min-width: 15rem;
+}
+
+button {
+    max-width: 5rem;
+    max-height: 2rem;
+}
+
+#rating-container {
+    display: flex;
+    gap: 2rem;
+    max-height: 4rem;
+    justify-content: center;
+    align-items: center;
+}
