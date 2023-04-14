@@ -32,13 +32,16 @@ const getFortune = () => {
 		.catch((error) => console.log(error));
 };
 
-const getFoods = () => {
+const getFoods = (evt) => {
 	foodList.innerHTML = "";
 	axios
 		.get("http://localhost:4000/api/foods")
 		.then((res) => {
 			let foodsArr = res.data;
 			foodsArr.forEach((food, index) => {
+				let foodCard = document.createElement("div");
+				foodCard.className = "food-card";
+
 				let foodTitle = document.createElement("h2");
 				let newFood = document.createElement("img");
 				let deleteButton = document.createElement("button");
@@ -51,9 +54,11 @@ const getFoods = () => {
 				deleteButton.id = index;
 				deleteButton.addEventListener("click", deleteFood);
 
-				foodList.appendChild(foodTitle);
-				foodList.appendChild(newFood);
-				foodList.appendChild(deleteButton);
+				foodCard.appendChild(foodTitle);
+				foodCard.appendChild(newFood);
+				foodCard.appendChild(deleteButton);
+
+				foodList.appendChild(foodCard);
 			});
 		})
 		.catch((error) => console.log(error));
@@ -63,7 +68,7 @@ const getRating = () => {
 		.get("http://localhost:4000/api/rating")
 		.then((res) => {
 			let newRating = res.data.rating;
-			rating.textContent = newRating;
+			rating.textContent = `${newRating}★`;
 		})
 		.catch((error) => console.log(error));
 };
@@ -99,6 +104,7 @@ foodButton.addEventListener("click", addFood);
 // Delete Functions
 
 const deleteFood = (evt) => {
+	evt.preventDefault();
 	axios
 		.delete(`http://localhost:4000/api/foods/${evt.target.id}`)
 		.then((res) => {
@@ -116,7 +122,7 @@ const changeRating = (evt) => {
 		.put("http://localhost:4000/api/rating/change", { type })
 		.then((res) => {
 			let newRating = res.data.rating;
-			rating.textContent = newRating;
+			rating.textContent = `${newRating}★`;
 		})
 		.catch((error) => console.log(error));
 };
